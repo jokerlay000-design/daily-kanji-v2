@@ -1,2 +1,19 @@
-<h1>Kanjis#index</h1>
-<p>Find me in app/views/kanjis/index.html.erb</p>
+<h1>DailyKanji</h1>
+
+<% if @today_kanji %>
+  <h2>Today's Kanji</h2>
+  <div>
+    <p>Character: <%= @today_kanji.character %></p>
+    <p>Meaning: <%= @today_kanji.meaning %></p>
+    <p>Onyomi: <%= @today_kanji.onyomi %></p>
+    <p>Kunyomi: <%= @today_kanji.kunyomi %></p>
+    <p>Example: <%= @today_kanji.example_sentence %></p>
+  </div>
+<% end %>
+
+<h2>All Kanji</h2>
+<% @all_kanjis.each do |kanji| %>
+  <div>
+    <p><%= kanji.character %> - <%= kanji.meaning %></p>
+  </div>
+<% end %>

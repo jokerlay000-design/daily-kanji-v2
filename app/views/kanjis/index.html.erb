@@ -14,6 +14,6 @@
 <h2>All Kanji</h2>
 <% @all_kanjis.each do |kanji| %>
   <div>
-    <p><%= kanji.character %> - <%= kanji.meaning %></p>
+    <p><%= link_to kanji.character, kanji_path(kanji) %> - <%= kanji.meaning %></p>
   </div>
 <% end %>

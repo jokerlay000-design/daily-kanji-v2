@@ -1,0 +1,11 @@
+<h1><%= @kanji.character %></h1>
+
+<div>
+  <p>Meaning: <%= @kanji.meaning %></p>
+  <p>Onyomi: <%= @kanji.onyomi %></p>
+  <p>Kunyomi: <%= @kanji.kunyomi %></p>
+  <p>Example: <%= @kanji.example_sentence %></p>
+  <p>level: <%= @kanji.level %></p>
+  <p>Day: <%= @kanji.day_number %></p>
+</div>
+  <%= link_to "Back to all kanji", root_path %>a

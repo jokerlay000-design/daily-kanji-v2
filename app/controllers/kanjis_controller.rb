@@ -4,6 +4,10 @@ class KanjisController < ApplicationController
     @all_kanjis = Kanji.order(:day_number)
   end
 
+  def show 
+    @kanji = Kanji.find(params[:id])
+  end  
+
   private
 
   def current_day

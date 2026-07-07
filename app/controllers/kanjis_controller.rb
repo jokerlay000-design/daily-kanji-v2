@@ -6,6 +6,8 @@ class KanjisController < ApplicationController
 
   def show 
     @kanji = Kanji.find(params[:id])
+    @posts = @kanji.posts.includes(:user).order(created_at: :desc)
+    @post = Post.new
   end  
 
   private

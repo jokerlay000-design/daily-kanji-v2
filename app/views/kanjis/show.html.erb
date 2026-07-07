@@ -8,4 +8,24 @@
   <p>level: <%= @kanji.level %></p>
   <p>Day: <%= @kanji.day_number %></p>
 </div>
+
+<h2>Sightings</h2>
+
+<% if user_signed_in? %>
+  <%= link_to "Share your sighting", new_kanji_post_path(@kanji) %>
+<% else %>
+  <%= link_to "Sign in", new_user_session_path %> to share your sighting!
+<% end %>
+
+<% if @posts.empty? %>
+  <p>No sightings yet - be the first!</p>
+<% else %>
+  <% @posts.each do |post| %>
+    <div>
+      <p><strong><%= post.user.nickname %></strong></p>
+      <p><%= post.caption %></p>
+      <p><%= post.created_at.strftime("%b %d, %Y") %></p>
+    </div>
+  <% end %>
+<% end %>
   <%= link_to "Back to all kanji", root_path %>a

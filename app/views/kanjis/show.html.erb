@@ -21,14 +21,33 @@
   <p>No sightings yet - be the first!</p>
 <% else %>
   <% @posts.each do |post| %>
-    <div>
-      <% if post.image.attached? %>
-        <%= image_tag post.image, width: 300 %>
+   <div>
+    <% if post.image.attached? %>
+      <%= image_tag post.image, width: 300 %>
+    <% end %>
+    <p><strong><%= post.user.nickname %></strong></p>
+    <p><%= post.caption %></p>
+    <p><%= post.created_at.strftime("%b %d, %Y") %></p>
+
+    <%# Comments section %>
+    <% post.comments.each do |comment| %>
+      <div>
+        <p><strong><%= comment.user.nickname %></strong>: <%= comment.content %></p>
+        <% if user_signed_in? && comment.user == current_user %>
+          <%= link_to "Delete", kanji_post_comment_path(@kanji, post, comment), data: { turbo_method: :delete }, style: "color: red" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%# Comment form %>
+    <% if user_signed_in? %>
+      <%= form_with model: [@kanji, post, Comment.new] do |f| %>
+        <%= f.text_field :content, placeholder: "Add a comment..." %>
+        <%= f.submit "Post" %>
       <% end %>
-      <p><strong><%= post.user.nickname %></strong></p>
-      <p><%= post.caption %></p>
-      <p><%= post.created_at.strftime("%b %d, %Y") %></p>
-    </div>
+    <% end %>
+
+   </div>
   <% end %>
 <% end %>
 
